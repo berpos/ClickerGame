@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import mango from '../assets/mango.png';
 
 export default function Counter() {
   const [count, setCount] = useState(0);
@@ -27,9 +28,11 @@ export default function Counter() {
 
   return (
     <div>
-      <p>Count: {count}</p>
-      <button onClick={sum}>Click me</button>
-      <button onClick={increment}> 🥭{incrementBy}</button>
+      <h1 className="headers">{count} Mangoes</h1>
+      <div onClick={sum}>
+        <img src={mango} alt="logo" className="logo" />
+      </div>
+      <button onClick={increment}> AutoClick {incrementBy} 🥭</button>
     </div>
   );
 };
