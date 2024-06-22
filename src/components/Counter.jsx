@@ -4,6 +4,7 @@ import mango from '../assets/mango.png';
 export default function Counter() {
   const [count, setCount] = useState(0);
   const [incrementBy, setIncrementBy] = useState(1);
+  const [isAutoClickerActive, setIsAutoClickerActive] = useState(false);
   const incrementByRef = useRef(incrementBy);
 
   useEffect(() => {
@@ -11,19 +12,25 @@ export default function Counter() {
   }, [incrementBy]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCount(prevCount => prevCount + incrementByRef.current);
-    }, 1000);
-
+    let interval;
+    if (isAutoClickerActive) {
+      interval = setInterval(() => {
+        setCount(prevCount => prevCount + incrementByRef.current);
+      }, 1000);
+    }
     return () => clearInterval(interval);
-  }, []);
+  }, [isAutoClickerActive]);
 
   function sum() {
-    setCount(count + 1);
+    setCount(prevCount => prevCount + 1);
   }
 
   function increment() {
     setIncrementBy(prevIncrementBy => prevIncrementBy + 1);
+  }
+
+  function AutoClicker() {
+    setIsAutoClickerActive(true);
   }
 
   return (
@@ -32,6 +39,9 @@ export default function Counter() {
       <div onClick={sum}>
         <img src={mango} alt="logo" className="logo" />
       </div>
+      {!isAutoClickerActive && (
+        <button onClick={AutoClicker}>Auto Clicker</button>
+      )}
       <button onClick={increment}> AutoClick {incrementBy} 🥭</button>
     </div>
   );
