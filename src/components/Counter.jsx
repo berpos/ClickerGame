@@ -35,7 +35,7 @@ export default function Counter() {
 
   return (
     <div>
-      <h1 className="headers">{count} Mangoes</h1>
+      <h1 className="headers">{count} MANGOES</h1>
       <div onClick={sum}>
         <img src={mango} alt="logo" className="logo" />
       </div>
